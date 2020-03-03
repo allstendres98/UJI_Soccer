@@ -10,13 +10,15 @@
         android:id="@+id/league"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="8dp"
         android:text="LEAGUE"
         android:textColor="#4E4B4B"
         android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Spinner
         android:id="@+id/spinner"
@@ -35,19 +37,20 @@
         android:id="@+id/standingsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
         android:text="STANDINGS"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/start"
+        app:layout_constraintVertical_bias="0.87" />
 
     <TextView
         android:id="@+id/countryTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="200dp"
-        android:layout_marginRight="200dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginRight="64dp"
         android:text="Country:"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -58,28 +61,31 @@
         android:id="@+id/startTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:text="Start:"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/countryTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.04"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/countryTextView" />
 
     <TextView
         android:id="@+id/endTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
         android:text="End:"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/startTextView"
-        app:layout_constraintTop_toBottomOf="@+id/startTextView" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/startTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.68"
+        app:layout_constraintStart_toEndOf="@+id/start" />
 
     <TextView
         android:id="@+id/country"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
         android:text="blablabla"
         app:layout_constraintBaseline_toBaselineOf="@+id/countryTextView"
         app:layout_constraintStart_toEndOf="@+id/countryTextView" />
@@ -88,16 +94,20 @@
         android:id="@+id/start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
         android:text="blablabla"
         app:layout_constraintBaseline_toBaselineOf="@+id/startTextView"
-        app:layout_constraintStart_toStartOf="@+id/country" />
+        app:layout_constraintStart_toEndOf="@+id/startTextView" />
 
     <TextView
         android:id="@+id/end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
         android:text="blablabla"
         app:layout_constraintBaseline_toBaselineOf="@+id/endTextView"
-        app:layout_constraintStart_toStartOf="@+id/start" />
+        app:layout_constraintStart_toEndOf="@+id/endTextView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
