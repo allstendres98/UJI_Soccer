@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         MainPresenter presenter = new MainPresenter(this, Model.getInstance(getApplicationContext()));
 
         spinner = findViewById(R.id.spinner);
-        String x = "Me cago en la santisima trinidad, que miedo me da el coronavirus";
+        String x = "Ricardo te voy a pushear esto, vale?";
 
         String url = "https://api.football-data.org/v2/competitions?plan=TIER_ONE";
 
