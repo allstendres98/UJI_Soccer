@@ -54,7 +54,7 @@ public final class Model {
 
             @Override
             protected void onPostExecute(League[] league) {
-                super.onPostExecute(league);
+               leagueresponse.onResponse(league);
             }
         }.execute();
     }
@@ -65,7 +65,7 @@ public final class Model {
         JsonObjectRequest ObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                FillDataBase(response);
+                FillDataBaseWithLeagues(response);
             }
         }, errorListener){
             @Override
@@ -99,10 +99,14 @@ public final class Model {
                 leagues.add(new League(id, name, countryName, startDate, endDate));
 
             }
+
+            dao.insertLeague(leagues);
         }
         catch (JSONException e)
         {
 
         }
+
+
     }
 }

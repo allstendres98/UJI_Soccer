@@ -24,6 +24,14 @@ public class League implements Comparable<League>, Parcelable {
     @ColumnInfo(name = "End")
     public String end;
 
+    public League(int id, String name, String country, String start, String end) {
+        this.id = id;
+        this.name = name;
+        this.country = country;
+        this.start = start;
+        this.end = end;
+    }
+
     protected League(Parcel in) {
         id = in.readInt();
         name = in.readString();
@@ -62,4 +70,5 @@ public class League implements Comparable<League>, Parcelable {
     public int compareTo(League o) {
         return 0;
     }
+    
 }
