@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        MainPresenter presenter = new MainPresenter(this, Model.getInstance(getApplicationContext()));
 
         String url = "https://api.football-data.org/v2/competitions?plan=TIER_ONE";
 
