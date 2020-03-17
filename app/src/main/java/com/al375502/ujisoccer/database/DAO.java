@@ -16,8 +16,8 @@ public interface DAO {
     Team[] allTeamsInALeague(int id);
 
     @Insert
-    void insertLeague(List<League> x);
+    void insertLeague(List<League> leagues);
 
     @Insert
-    void insertTeams(Team team);
+    void insertTeams(List<Team> teams);
 }

@@ -62,6 +62,17 @@ public class Team implements Parcelable {
         return 0;
     }
 
+    public Team(int id, String name, String shortName, String stadium, String colours, String website, int yearFoundation, int league_id) {
+        this.id = id;
+        this.name = name;
+        this.shortName = shortName;
+        this.stadium = stadium;
+        this.colours = colours;
+        this.website = website;
+        this.yearFoundation = yearFoundation;
+        this.league_id = league_id;
+    }
+
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(id);

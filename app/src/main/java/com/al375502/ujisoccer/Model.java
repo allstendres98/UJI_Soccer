@@ -2,6 +2,7 @@ package com.al375502.ujisoccer;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.widget.Toast;
 
 import androidx.room.Room;
 
@@ -20,6 +21,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.xml.transform.ErrorListener;
 
 
 public final class Model {
@@ -67,7 +70,12 @@ public final class Model {
             public void onResponse(JSONObject response) {
                 FillDataBaseWithLeagues(response);
             }
-        }, errorListener){
+        }, new Response.ErrorListener(){
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }){
             @Override
             public Map<String, String> getHeaders(){
                 Map<String, String> headers = new HashMap<>();
