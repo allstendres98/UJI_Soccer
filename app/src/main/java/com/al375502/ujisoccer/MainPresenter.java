@@ -25,7 +25,7 @@ public class MainPresenter {
             @Override
             public void onResponse(League[] response) {
                 if(response == null){
-                    model.updateLeagues();
+                    model.updateLeagues(this);
                 }else{
                     ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(view,
                             android.R.layout.simple_spinner_dropdown_item,

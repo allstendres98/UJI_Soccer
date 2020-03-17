@@ -62,12 +62,12 @@ public final class Model {
         }.execute();
     }
 
-    public void updateLeagues(/*Listener<League[]> errorToast*/){
+    public void updateLeagues(final Listener<League[]> tryagain){
 
         JsonObjectRequest ObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                FillDataBaseWithLeagues(response);
+                FillDataBaseWithLeagues(response, tryagain);
             }
         }, new Response.ErrorListener(){
             @Override
@@ -84,7 +84,7 @@ public final class Model {
         };
     }
 
-    private void FillDataBaseWithLeagues(JSONObject response){
+    private void FillDataBaseWithLeagues(JSONObject response, final Listener<League[]> tryagain){
 
         List<League> leagues = new ArrayList<>();
 
@@ -107,6 +107,7 @@ public final class Model {
             }
 
             dao.insertLeague(leagues);
+            tryagain.onResponse(dao.allLeagues());
         }
         catch (JSONException e)
         {
