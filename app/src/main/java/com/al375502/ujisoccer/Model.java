@@ -33,11 +33,12 @@ public final class Model {
     public static final String teams = "/teams";
 
     private RequestQueue queue;
-
+    private Context c;
     private static  Model model;
 
     private Model(Context context){
-        Database dataBase = Room.databaseBuilder(context, Database.class, "DataBase").build();
+        c = context;
+        Database dataBase = Room.databaseBuilder(c, Database.class, "DataBase").build();
     }
 
     public static Model getInstance(Context context) {
@@ -54,7 +55,6 @@ public final class Model {
             protected League[] doInBackground(Void... voids) {
                 return dao.allLeagues();
             }
-
             @Override
             protected void onPostExecute(League[] league) {
                leagueresponse.onResponse(league);
@@ -62,9 +62,8 @@ public final class Model {
         }.execute();
     }
 
-    public List<League> updateLeagues(){
+    public void updateLeagues(/*Listener<League[]> errorToast*/){
 
-        List<League> Leagues;
         JsonObjectRequest ObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -73,7 +72,7 @@ public final class Model {
         }, new Response.ErrorListener(){
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                processError(error.getMessage());
             }
         }){
             @Override
@@ -83,10 +82,9 @@ public final class Model {
                 return headers;
             }
         };
-        return ;
     }
 
-    public void FillDataBaseWithLeagues(JSONObject response){
+    private void FillDataBaseWithLeagues(JSONObject response){
 
         List<League> leagues = new ArrayList<>();
 
@@ -114,7 +112,11 @@ public final class Model {
         {
 
         }
+    }
 
-
+    public void processError(String e) {
+        Toast toast = Toast.makeText(c ,e,
+                Toast.LENGTH_LONG);
+        toast.show();
     }
 }
