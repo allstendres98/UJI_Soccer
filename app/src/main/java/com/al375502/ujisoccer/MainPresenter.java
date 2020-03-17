@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 
 import com.al375502.ujisoccer.database.League;
 import com.android.volley.Response;
+import com.android.volley.VolleyError;
 
 import java.util.ArrayList;
 
@@ -21,18 +22,27 @@ public class MainPresenter {
     }
 
     public void fillSpiner(final Spinner spinner) {
-        model.getLeagues(new Response.Listener<League[]>(){
+        model.getLeagues(new Response.Listener<League[]>() {
             @Override
             public void onResponse(League[] response) {
-                if(response == null){
-                    model.updateLeagues(this);
-                }else{
-                    ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(view,
-                            android.R.layout.simple_spinner_dropdown_item,
-                            response);
-                     spinner.setAdapter(spinnerArrayAdapter);
-                }
+                onLeagueAviable(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
             }
         });
+    }
+
+    public void onLeagueAviable(League[] leagues){
+        if (leagues == null) {
+            model.updateLeagues();
+        } /*else {
+            ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(view,
+                    android.R.layout.simple_spinner_dropdown_item,
+                    leagues);
+            spinner.setAdapter(spinnerArrayAdapter);
+        }*/
     }
 }
