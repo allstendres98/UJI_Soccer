@@ -35,7 +35,7 @@ public class MainPresenter {
         });
     }
 
-    public void onLeagueAviable(League[] leagues){
+    private void onLeagueAviable(League[] leagues){
         if (leagues == null) {
             model.updateLeagues();
         } /*else {

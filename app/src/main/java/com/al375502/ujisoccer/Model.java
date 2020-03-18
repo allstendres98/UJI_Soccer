@@ -62,12 +62,12 @@ public final class Model {
         }.execute();
     }
 
-    public void updateLeagues(/*final Listener<League[]> tryagain*/){
+    public void updateLeagues(/*final Response.ErrorListener errorListener*/){
 
         JsonObjectRequest ObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                FillDataBaseWithLeagues(response/*, tryagain*/);
+                FillDataBaseWithLeagues(response/*, errorListener*/);
             }
         }, new Response.ErrorListener(){
             @Override
