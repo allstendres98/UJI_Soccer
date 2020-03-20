@@ -65,17 +65,12 @@ public final class Model {
 
     public void updateLeagues(final Listener<ArrayList<League>> listener, final Response.ErrorListener errorListener){
 
-        JsonObjectRequest ObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Listener<JSONObject>() {
+        JsonObjectRequest ObjectRequest = new JsonObjectRequest(Request.Method.GET, url+competitions, null, new Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 FillDataBaseWithLeagues(response, listener);
             }
-        }, new Response.ErrorListener(){
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                errorListener.onErrorResponse(error);
-            }
-        }){
+        }, errorListener){
             @Override
             public Map<String, String> getHeaders(){
                 Map<String, String> headers = new HashMap<>();

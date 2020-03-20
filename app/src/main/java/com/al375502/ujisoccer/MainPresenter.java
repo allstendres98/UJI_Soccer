@@ -42,6 +42,7 @@ public class MainPresenter {
                 @Override
                 public void onResponse(ArrayList<League> leagues) {
                     //view.FillSpinner(leagues);
+                    Log.d("qwer", "onResponse: " + leagues);
                 }
             }, new Response.ErrorListener() {
                 @Override
