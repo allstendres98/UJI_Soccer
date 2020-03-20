@@ -1,5 +1,6 @@
 package com.al375502.ujisoccer;
 
+import android.media.MediaSync;
 import android.net.sip.SipSession;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
@@ -11,6 +12,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainPresenter {
     MainActivity view;
@@ -25,24 +27,29 @@ public class MainPresenter {
     }
 
     public void prueba(){
-        model.getLeagues(new Response.Listener<League[]>() {
+        model.getLeagues(new Response.Listener<List<League>>() {
             @Override
-            public void onResponse(League[] response) {
-                onLeagueAvailable(response, this);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
+            public void onResponse(List<League> response) {
+                onLeagueAvailable(response);
             }
         });
     }
 
-    private void onLeagueAvailable(League[] leagues, final Response.Listener<League[]> listener){
-        if (leagues == null) {
-            model.updateLeagues(listener);
+    private void onLeagueAvailable(List<League> leagues){
+        if (leagues.size() == 0) {
+            model.updateLeagues(new Response.Listener<List<League>>() {
+                @Override
+                public void onResponse(List<League> leagues) {
+                    view.FillSpinner(leagues);
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                }
+            });
         }
-        else
-            view.FillSpinner(leagues);
+
+
     }
 }

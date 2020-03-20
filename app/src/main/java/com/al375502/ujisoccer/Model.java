@@ -49,20 +49,20 @@ public final class Model {
     }
 
 
-    public void getLeagues(final Listener<League[]> leagueresponse, final Response.ErrorListener errorListener){
-        new AsyncTask<Void, Void, League[]>(){
+    public void getLeagues(final Listener<List<League>> leagueresponse){
+        new AsyncTask<Void, Void, List<League>>(){
             @Override
-            protected League[] doInBackground(Void... voids) {
-                return dao.allLeagues();
+            protected List<League> doInBackground(Void... voids) {
+                return new ArrayList<>(dao.allLeagues());
             }
             @Override
-            protected void onPostExecute(League[] league) {
+            protected void onPostExecute(List<League> league) {
                leagueresponse.onResponse(league);
             }
         }.execute();
     }
 
-    public void updateLeagues(final Response.Listener listener){
+    public void updateLeagues(final Listener<List<League>> listener, final Response.ErrorListener errorListener){
 
         JsonObjectRequest ObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Listener<JSONObject>() {
             @Override
@@ -85,7 +85,7 @@ public final class Model {
         queue.add(ObjectRequest);
     }
 
-    private void FillDataBaseWithLeagues(JSONObject response, final Listener<League[]> listener){
+    private void FillDataBaseWithLeagues(JSONObject response, final Listener<List<League>> listener){
 
         List<League> leagues = new ArrayList<>();
 
@@ -116,7 +116,7 @@ public final class Model {
         }
     }
 
-    private void insertLeaguesInDao(final List<League> leagues, final Listener<League[]> listener){
+    private void insertLeaguesInDao(final List<League> leagues, final Listener<List<League>> listener){
         new AsyncTask<Void, Void, Void>(){
 
             @Override
@@ -127,7 +127,7 @@ public final class Model {
 
             @Override
             protected void onPostExecute(Void aVoid) {
-                listener.onResponse(null);
+                listener.onResponse(leagues);
             }
         }.execute();
     }
