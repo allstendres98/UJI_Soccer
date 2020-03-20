@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-    public void FillSpinner(ArrayList<League> leagues){
+    public void FillSpinner(ArrayList<String> leagues){
         ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(this,
                 android.R.layout.simple_spinner_dropdown_item,
                 leagues);

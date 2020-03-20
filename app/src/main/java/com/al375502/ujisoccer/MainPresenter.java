@@ -41,7 +41,12 @@ public class MainPresenter {
             model.updateLeagues(new Response.Listener<ArrayList<League>>() {
                 @Override
                 public void onResponse(ArrayList<League> leagues) {
-                    //view.FillSpinner(leagues);
+                    ArrayList<String> names = new ArrayList<>();
+                    for (League league:leagues
+                         ) {
+                        names.add(league.name);
+                    }
+                    view.FillSpinner(names);
                     Log.d("qwer", "onResponse: " + leagues);
                 }
             }, new Response.ErrorListener() {
