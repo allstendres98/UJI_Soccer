@@ -18,7 +18,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -87,20 +89,28 @@ public final class Model {
 
         try{
             JSONArray array = response.getJSONArray("competitions");
+            ArrayList<Integer> desiredLeagues = new ArrayList<Integer>(Arrays.asList(2021, 2015, 2002, 2019, 2003, 2017, 2014));
+
 
             for(int i = 0; i < array.length(); i++){
+                boolean isIn = false;
                 JSONObject extractedleague = array.getJSONObject(i);
 
                 int id = extractedleague.getInt("id");
-                String name = extractedleague.getString("name");
-                JSONObject area = extractedleague.getJSONObject("area");
-                String countryName = area.getString("name");
-                JSONObject currentSeason = extractedleague.getJSONObject("currentSeason");
-                String startDate = currentSeason.getString("startDate");
-                String endDate = currentSeason.getString("endDate");
+                for(int j=0; j < desiredLeagues.size(); j++)
+                {
+                    if(id == desiredLeagues.get(j)) isIn = true;
+                }
+                if(isIn) {
+                    String name = extractedleague.getString("name");
+                    JSONObject area = extractedleague.getJSONObject("area");
+                    String countryName = area.getString("name");
+                    JSONObject currentSeason = extractedleague.getJSONObject("currentSeason");
+                    String startDate = currentSeason.getString("startDate");
+                    String endDate = currentSeason.getString("endDate");
 
-                leagues.add(new League(id, name, countryName, startDate, endDate));
-
+                    leagues.add(new League(id, name, countryName, startDate, endDate));
+                }
             }
 
             insertLeaguesInDao(leagues, listener );
