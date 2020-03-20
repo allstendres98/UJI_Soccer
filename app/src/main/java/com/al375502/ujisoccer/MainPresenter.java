@@ -19,13 +19,16 @@ public class MainPresenter {
     public MainPresenter(MainActivity view, Model model) {
         this.view = view;
         this.model = model;
+        prueba();
+
+
     }
 
-    public void fillSpiner(final Spinner spinner) {
+    public void prueba(){
         model.getLeagues(new Response.Listener<League[]>() {
             @Override
             public void onResponse(League[] response) {
-                onLeagueAviable(response);
+                onLeagueAvailable(response, this);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -35,14 +38,11 @@ public class MainPresenter {
         });
     }
 
-    private void onLeagueAviable(League[] leagues){
+    private void onLeagueAvailable(League[] leagues, final Response.Listener<League[]> listener){
         if (leagues == null) {
-            model.updateLeagues();
-        } /*else {
-            ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(view,
-                    android.R.layout.simple_spinner_dropdown_item,
-                    leagues);
-            spinner.setAdapter(spinnerArrayAdapter);
-        }*/
+            model.updateLeagues(listener);
+        }
+        else
+            view.FillSpinner(leagues);
     }
 }

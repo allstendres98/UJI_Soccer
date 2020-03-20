@@ -62,12 +62,12 @@ public final class Model {
         }.execute();
     }
 
-    public void updateLeagues(/*final Response.ErrorListener errorListener*/){
+    public void updateLeagues(final Response.Listener listener){
 
         JsonObjectRequest ObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                FillDataBaseWithLeagues(response/*, errorListener*/);
+                FillDataBaseWithLeagues(response, listener);
             }
         }, new Response.ErrorListener(){
             @Override
@@ -82,9 +82,10 @@ public final class Model {
                 return headers;
             }
         };
+        queue.add(ObjectRequest);
     }
 
-    private void FillDataBaseWithLeagues(JSONObject response/*, final Listener<League[]> tryagain*/){
+    private void FillDataBaseWithLeagues(JSONObject response, final Listener<League[]> listener){
 
         List<League> leagues = new ArrayList<>();
 
@@ -106,13 +107,29 @@ public final class Model {
 
             }
 
-            dao.insertLeague(leagues);
+            insertLeaguesInDao(leagues, listener );
             //tryagain.onResponse(dao.allLeagues());
         }
         catch (JSONException e)
         {
 
         }
+    }
+
+    private void insertLeaguesInDao(final List<League> leagues, final Listener<League[]> listener){
+        new AsyncTask<Void, Void, Void>(){
+
+            @Override
+            protected Void doInBackground(Void[] voids) {
+                dao.insertLeague(leagues);
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                listener.onResponse(null);
+            }
+        }.execute();
     }
 
     public void processError(String e) {

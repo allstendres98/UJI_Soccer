@@ -3,6 +3,7 @@ package com.al375502.ujisoccer;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import org.json.*;
@@ -16,8 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
-
-    Spinner spinner;
+    public Spinner spinner;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +26,13 @@ public class MainActivity extends AppCompatActivity {
 
         spinner = findViewById(R.id.spinner);
 
-        presenter.fillSpiner(spinner);
+
+
+    }
+    public void FillSpinner(League[] leagues){
+        ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(this,
+                android.R.layout.simple_spinner_dropdown_item,
+                leagues);
+        spinner.setAdapter(spinnerArrayAdapter);
     }
 }
