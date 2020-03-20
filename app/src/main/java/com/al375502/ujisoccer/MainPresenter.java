@@ -2,6 +2,7 @@ package com.al375502.ujisoccer;
 
 import android.media.MediaSync;
 import android.net.sip.SipSession;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
@@ -27,20 +28,21 @@ public class MainPresenter {
     }
 
     public void prueba(){
-        model.getLeagues(new Response.Listener<List<League>>() {
+        model.getLeagues(new Response.Listener<ArrayList<League> >() {
             @Override
-            public void onResponse(List<League> response) {
+            public void onResponse(ArrayList<League>  response) {
                 onLeagueAvailable(response);
             }
         });
     }
 
-    private void onLeagueAvailable(List<League> leagues){
+    private void onLeagueAvailable(ArrayList<League> leagues){
         if (leagues.size() == 0) {
-            model.updateLeagues(new Response.Listener<List<League>>() {
+            model.updateLeagues(new Response.Listener<ArrayList<League>>() {
                 @Override
-                public void onResponse(List<League> leagues) {
-                    view.FillSpinner(leagues);
+                public void onResponse(ArrayList<League> leagues) {
+                    //view.FillSpinner(leagues);
+                    Log.d("qwer", "onResponse: " + leagues);
                 }
             }, new Response.ErrorListener() {
                 @Override

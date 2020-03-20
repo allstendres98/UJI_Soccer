@@ -10,10 +10,10 @@ import java.util.List;
 @Dao
 public interface DAO {
     @Query("SELECT * FROM league ORDER BY name")
-    List<League> allLeagues();
+    ArrayList<League>  allLeagues();
 
     @Query("SELECT * FROM team WHERE league_id == :id ORDER BY name")
-    List<Team> allTeamsInALeague(int id);
+    ArrayList<Team>  allTeamsInALeague(int id);
 
     @Insert
     void insertLeague(List<League> leagues);

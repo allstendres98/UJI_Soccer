@@ -49,20 +49,20 @@ public final class Model {
     }
 
 
-    public void getLeagues(final Listener<List<League>> leagueresponse){
-        new AsyncTask<Void, Void, List<League>>(){
+    public void getLeagues(final Listener<ArrayList<League> > leagueresponse){
+        new AsyncTask<Void, Void, ArrayList<League>>(){
             @Override
-            protected List<League> doInBackground(Void... voids) {
+            protected ArrayList<League> doInBackground(Void... voids) {
                 return new ArrayList<>(dao.allLeagues());
             }
             @Override
-            protected void onPostExecute(List<League> league) {
+            protected void onPostExecute(ArrayList<League> league) {
                leagueresponse.onResponse(league);
             }
         }.execute();
     }
 
-    public void updateLeagues(final Listener<List<League>> listener, final Response.ErrorListener errorListener){
+    public void updateLeagues(final Listener<ArrayList<League>> listener, final Response.ErrorListener errorListener){
 
         JsonObjectRequest ObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Listener<JSONObject>() {
             @Override
@@ -85,9 +85,9 @@ public final class Model {
         queue.add(ObjectRequest);
     }
 
-    private void FillDataBaseWithLeagues(JSONObject response, final Listener<List<League>> listener){
+    private void FillDataBaseWithLeagues(JSONObject response, final Listener<ArrayList<League>> listener){
 
-        List<League> leagues = new ArrayList<>();
+        ArrayList<League> leagues = new ArrayList<>();
 
         try{
             JSONArray array = response.getJSONArray("competitions");
@@ -116,7 +116,7 @@ public final class Model {
         }
     }
 
-    private void insertLeaguesInDao(final List<League> leagues, final Listener<List<League>> listener){
+    private void insertLeaguesInDao(final ArrayList<League> leagues, final Listener<ArrayList<League>> listener){
         new AsyncTask<Void, Void, Void>(){
 
             @Override

@@ -13,6 +13,7 @@ import com.android.volley.*;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-    public void FillSpinner(List<League> leagues){
+    public void FillSpinner(ArrayList<League> leagues){
         ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(this,
                 android.R.layout.simple_spinner_dropdown_item,
                 leagues);
