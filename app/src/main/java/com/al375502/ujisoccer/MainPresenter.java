@@ -5,6 +5,7 @@ import android.net.sip.SipSession;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -22,36 +23,40 @@ public class MainPresenter {
     public MainPresenter(MainActivity view, Model model) {
         this.view = view;
         this.model = model;
-        prueba();
-
-
+        GetLeagues();
     }
 
-    public void prueba(){
-        model.getLeagues(new Response.Listener<ArrayList<League> >() {
+    public void GetLeagues(){
+        model.getLeagues(new Response.Listener<ArrayList<League>>() {
             @Override
-            public void onResponse(ArrayList<League>  response) {
+            public void onResponse(ArrayList<League> response) {
                 onLeagueAvailable(response);
             }
         });
     }
 
     private void onLeagueAvailable(ArrayList<League> leagues){
+                    Log.d("qwer", "onResponse: " + leagues);
         if (leagues.size() == 0) {
             model.updateLeagues(new Response.Listener<ArrayList<League>>() {
                 @Override
                 public void onResponse(ArrayList<League> leagues) {
                     //view.FillSpinner(leagues);
-                    Log.d("qwer", "onResponse: " + leagues);
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-
+                    processError(error.getMessage());
                 }
             });
         }
 
 
+    }
+
+    public void processError(String e) {
+        Toast toast = Toast.makeText(view ,e,
+                Toast.LENGTH_LONG);
+        toast.show();
     }
 }

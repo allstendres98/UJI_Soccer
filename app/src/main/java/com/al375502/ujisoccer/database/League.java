@@ -3,6 +3,7 @@ package com.al375502.ujisoccer.database;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -70,5 +71,10 @@ public class League implements Comparable<League>, Parcelable {
     public int compareTo(League o) {
         return 0;
     }
-    
+
+    @NonNull
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

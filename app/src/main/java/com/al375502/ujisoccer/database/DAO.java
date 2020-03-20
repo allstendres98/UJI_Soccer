@@ -2,6 +2,7 @@ package com.al375502.ujisoccer.database;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
 import java.util.ArrayList;
@@ -10,12 +11,12 @@ import java.util.List;
 @Dao
 public interface DAO {
     @Query("SELECT * FROM league ORDER BY name")
-    ArrayList<League>  allLeagues();
+    List<League> allLeagues();
 
-    @Query("SELECT * FROM team WHERE league_id == :id ORDER BY name")
-    ArrayList<Team>  allTeamsInALeague(int id);
+    @Query("SELECT * FROM team WHERE league_id = :id ORDER BY name")
+    List<Team> allTeamsInALeague(int id);
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertLeague(List<League> leagues);
 
     @Insert

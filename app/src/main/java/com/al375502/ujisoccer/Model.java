@@ -12,6 +12,7 @@ import com.al375502.ujisoccer.database.League;
 import com.android.volley.*;
 import com.android.volley.Response.Listener;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,12 +34,12 @@ public final class Model {
     public static final String teams = "/teams";
 
     private RequestQueue queue;
-    private Context c;
     private static  Model model;
 
     private Model(Context context){
-        c = context;
-        Database dataBase = Room.databaseBuilder(c, Database.class, "DataBase").build();
+        Database dataBase = Room.databaseBuilder(context, Database.class, "DataBase").build();
+        dao = dataBase.getDao();
+        queue = Volley.newRequestQueue(context);
     }
 
     public static Model getInstance(Context context) {
@@ -72,7 +73,7 @@ public final class Model {
         }, new Response.ErrorListener(){
             @Override
             public void onErrorResponse(VolleyError error) {
-                processError(error.getMessage());
+                errorListener.onErrorResponse(error);
             }
         }){
             @Override
@@ -132,9 +133,4 @@ public final class Model {
         }.execute();
     }
 
-    public void processError(String e) {
-        Toast toast = Toast.makeText(c ,e,
-                Toast.LENGTH_LONG);
-        toast.show();
-    }
 }
