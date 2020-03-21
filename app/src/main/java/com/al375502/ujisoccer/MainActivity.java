@@ -2,11 +2,13 @@ package com.al375502.ujisoccer;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -26,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     public Spinner spinner;
     public ArrayList<League> Leagues;
     public TextView country, start, end;
+    public Button standingsButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
         country = findViewById(R.id.country);
         start = findViewById(R.id.start);
         end = findViewById(R.id.end);
+        standingsButton = findViewById(R.id.standingsButton);
+        standingsButton.setEnabled(false);
+
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
@@ -46,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
                 {
                     if(Leagues.get(i).name == leagueName)
                     {
+                        standingsButton.setEnabled(true);
                         country.setText(Leagues.get(i).country);
                         start.setText(Leagues.get(i).start);
                         end.setText(Leagues.get(i).end+"");
@@ -57,10 +64,15 @@ public class MainActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parentView) {
                 return;
             }
-
         });
 
+        standingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
 
+            }
+        });
 
     }
     public void FillSpinner(ArrayList<String> leagues){
