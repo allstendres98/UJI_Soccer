@@ -2,6 +2,7 @@ package com.al375502.ujisoccer;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     public ArrayList<League> Leagues;
     public TextView country, start, end;
     public Button standingsButton;
+    int leagueId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,11 +49,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 String leagueName = parentView.getSelectedItem().toString();
-                Log.d("qwer", "nombreLiga: " + leagueName);
                 for(int i = 0; i < Leagues.size(); i++)
                 {
                     if(Leagues.get(i).name == leagueName)
                     {
+                        leagueId = Leagues.get(i).id;
                         standingsButton.setEnabled(true);
                         country.setText(Leagues.get(i).country);
                         start.setText(Leagues.get(i).start);
@@ -69,11 +71,16 @@ public class MainActivity extends AppCompatActivity {
         standingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-
+                ChangeActivity();
             }
         });
 
+    }
+
+    public void ChangeActivity(){
+        Intent intent = new Intent(this, ListTeamActivity.class);
+        intent.putExtra(ListTeamActivity.LEAGUE, CreateInfo());
+        startActivity(intent);
     }
     public void FillSpinner(ArrayList<String> leagues){
 
@@ -81,5 +88,10 @@ public class MainActivity extends AppCompatActivity {
                 android.R.layout.simple_spinner_dropdown_item,
                 leagues);
         spinner.setAdapter(spinnerArrayAdapter);
+    }
+
+    public GetInfo CreateInfo(){
+        GetInfo getinfo = new GetInfo(Model.getInstance(getApplicationContext()), leagueId);
+        return getinfo;
     }
 }

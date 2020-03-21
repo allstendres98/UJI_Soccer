@@ -2,13 +2,13 @@ package com.al375502.ujisoccer;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.widget.Toast;
 
 import androidx.room.Room;
 
 import com.al375502.ujisoccer.database.DAO;
 import com.al375502.ujisoccer.database.Database;
 import com.al375502.ujisoccer.database.League;
+import com.al375502.ujisoccer.database.Team;
 import com.android.volley.*;
 import com.android.volley.Response.Listener;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -18,18 +18,17 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import javax.xml.transform.ErrorListener;
 
 
 public final class Model {
     DAO dao;
+    int actualLeague;
     public static final String url = "https://api.football-data.org/v2/competitions";
     public static final String competitions = "?plan=TIER_ONE";
     public static final String standings = "/standing";
@@ -138,4 +137,16 @@ public final class Model {
         }.execute();
     }
 
+    public void getTeams(final Listener<ArrayList<Team>> teamresponse) {
+        new AsyncTask<Void, Void, ArrayList<Team>>(){
+            @Override
+            protected ArrayList<Team> doInBackground(Void... voids) {
+                return new ArrayList<>(dao.allTeamsInALeague(actualLeague));
+            }
+            @Override
+            protected void onPostExecute(ArrayList<Team> teams) {
+                teamresponse.onResponse(teams);
+            }
+        }.execute();
+    }
 }

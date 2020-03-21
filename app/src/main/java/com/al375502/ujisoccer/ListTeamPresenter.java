@@ -1,31 +1,35 @@
 package com.al375502.ujisoccer;
 
-import android.util.Log;
 import android.widget.Toast;
 
-
 import com.al375502.ujisoccer.database.League;
+import com.al375502.ujisoccer.database.Team;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 
 import java.util.ArrayList;
 
-
-public class MainPresenter {
-    MainActivity view;
+public class ListTeamPresenter {
+    ListTeamActivity view;
     Model model;
+    int league;
 
-    public MainPresenter(MainActivity view, Model model) {
+    public ListTeamPresenter(ListTeamActivity view, GetInfo getInfo) {
         this.view = view;
-        this.model = model;
-        GetLeagues();
+        this.model = getInfo.getModel();
+        this.league = getInfo.getLeagueId();
+        setLeague();
+        GetTeams();
+    }
+    public void setLeague(){
+        model.actualLeague = league;
     }
 
-    public void GetLeagues(){
-        model.getLeagues(new Response.Listener<ArrayList<League>>() {
+    public void GetTeams(){
+        model.getTeams(new Response.Listener<ArrayList<Team>>() {
             @Override
-            public void onResponse(ArrayList<League> response) {
-                onLeagueAvailable(response);
+            public void onResponse(ArrayList<Team> response) {
+                //onLeagueAvailable(response);
             }
         });
     }
@@ -37,11 +41,11 @@ public class MainPresenter {
                 public void onResponse(ArrayList<League> leagues) {
                     ArrayList<String> names = new ArrayList<>();
                     for (League league:leagues
-                         ) {
+                    ) {
                         names.add(league.name);
                     }
-                    view.FillSpinner(names);
-                    view.Leagues = leagues;
+                    //view.FillSpinner(names);
+                    //view.Leagues = leagues;
                     //Log.d("qwer", "onResponse: " + leagues);
                 }
             }, new Response.ErrorListener() {
@@ -60,5 +64,4 @@ public class MainPresenter {
                 Toast.LENGTH_LONG);
         toast.show();
     }
-
 }
