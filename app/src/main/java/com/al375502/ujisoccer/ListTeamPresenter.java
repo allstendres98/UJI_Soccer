@@ -34,15 +34,15 @@ public class ListTeamPresenter {
         });
     }
 
-    private void onLeagueAvailable(ArrayList<League> leagues){
-        if (leagues.size() == 0) {
-            model.updateLeagues(new Response.Listener<ArrayList<League>>() {
+    private void onTeamsAvailable(ArrayList<Team> teams){
+        if (teams.size() == 0) {
+            model.updateLeagues(new Response.Listener<ArrayList<Team>>() {
                 @Override
-                public void onResponse(ArrayList<League> leagues) {
+                public void onResponse(ArrayList<Team> teams) {
                     ArrayList<String> names = new ArrayList<>();
-                    for (League league:leagues
+                    for (Team team:teams
                     ) {
-                        names.add(league.name);
+                        names.add(team.);
                     }
                     //view.FillSpinner(names);
                     //view.Leagues = leagues;
