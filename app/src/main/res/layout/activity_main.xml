@@ -80,7 +80,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:text="blablabla"
         app:layout_constraintBaseline_toBaselineOf="@+id/countryTextView"
         app:layout_constraintStart_toEndOf="@+id/countryTextView" />
 
@@ -88,7 +87,6 @@
         android:id="@+id/start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="blablabla"
         app:layout_constraintBaseline_toBaselineOf="@+id/startTextView"
         app:layout_constraintStart_toStartOf="@+id/country" />
 
@@ -96,7 +94,6 @@
         android:id="@+id/end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="blablabla"
         app:layout_constraintBaseline_toBaselineOf="@+id/endTextView"
         app:layout_constraintStart_toStartOf="@+id/start" />
 

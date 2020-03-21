@@ -3,8 +3,12 @@ package com.al375502.ujisoccer;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import org.json.*;
 
@@ -20,6 +24,9 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     public Spinner spinner;
+    public ArrayList<League> Leagues;
+    public TextView country, start, end;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,11 +34,37 @@ public class MainActivity extends AppCompatActivity {
         MainPresenter presenter = new MainPresenter(this, Model.getInstance(getApplicationContext()));
 
         spinner = findViewById(R.id.spinner);
+        country = findViewById(R.id.country);
+        start = findViewById(R.id.start);
+        end = findViewById(R.id.end);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                String leagueName = parentView.getSelectedItem().toString();
+                Log.d("qwer", "nombreLiga: " + leagueName);
+                for(int i = 0; i < Leagues.size(); i++)
+                {
+                    if(Leagues.get(i).name == leagueName)
+                    {
+                        country.setText(Leagues.get(i).country);
+                        start.setText(Leagues.get(i).start);
+                        end.setText(Leagues.get(i).end+"");
+                    }
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                return;
+            }
+
+        });
 
 
 
     }
     public void FillSpinner(ArrayList<String> leagues){
+
         ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(this,
                 android.R.layout.simple_spinner_dropdown_item,
                 leagues);
