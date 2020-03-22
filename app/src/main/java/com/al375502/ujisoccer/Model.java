@@ -9,6 +9,7 @@ import com.al375502.ujisoccer.database.DAO;
 import com.al375502.ujisoccer.database.Database;
 import com.al375502.ujisoccer.database.League;
 import com.al375502.ujisoccer.database.Team;
+import com.al375502.ujisoccer.database.TeamInStanding;
 import com.android.volley.*;
 import com.android.volley.Response.Listener;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -31,7 +32,7 @@ public final class Model {
     int actualLeague;
     public static final String url = "https://api.football-data.org/v2/competitions";
     public static final String competitions = "?plan=TIER_ONE";
-    public static final String standings = "/standing";
+    public static final String standings = "/standings";
     public static final String teams = "/teams";
 
     private RequestQueue queue;
@@ -168,42 +169,56 @@ public final class Model {
         queue.add(ObjectRequest);
     }
 
-    private void FillDataBaseWithTeams(JSONObject response, final Listener<ArrayList<Team>> listener){
+    private void FillDataBaseWithTeams(JSONObject response, final Listener<ArrayList<TeamInStanding>> listener){
 
-        ArrayList<Team> teams = new ArrayList<>();
+        ArrayList<TeamInStanding> standings = new ArrayList<>();
 
         try{
             JSONArray array = response.getJSONArray("standings");
-            ArrayList<Integer> desiredLeagues = new ArrayList<Integer>(Arrays.asList(2021, 2015, 2002, 2019, 2003, 2017, 2014));
+            JSONObject standing = array.getJSONObject(0);
+            JSONArray  table = standing.getJSONArray("table");
+
+            for(int i = 0; i < table.length(); i++){
+                JSONObject teamInStanding = array.getJSONObject(i);
+                JSONObject team = teamInStanding.getJSONObject("team");
+
+                String name = team.getString("name");
+                int position = teamInStanding.getInt("position");
+                int playedGames = teamInStanding.getInt("playedGames");
+                int won = teamInStanding.getInt("won");
+                int draw = teamInStanding.getInt("draw");
+                int lost = teamInStanding.getInt("lost");
+                int points = teamInStanding.getInt("points");
+                int goalsFor = teamInStanding.getInt("goalsFor");
+                int goalsAgainst = teamInStanding.getInt("goalsAgainst");
 
 
-            for(int i = 0; i < array.length(); i++){
-                boolean isIn = false;
-                JSONObject extractedleague = array.getJSONObject(i);
-
-                int id = extractedleague.getInt("id");
-                for(int j=0; j < desiredLeagues.size(); j++)
-                {
-                    if(id == desiredLeagues.get(j)) isIn = true;
-                }
-                if(isIn) {
-                    String name = extractedleague.getString("name");
-                    JSONObject area = extractedleague.getJSONObject("area");
-                    String countryName = area.getString("name");
-                    JSONObject currentSeason = extractedleague.getJSONObject("currentSeason");
-                    String startDate = currentSeason.getString("startDate");
-                    String endDate = currentSeason.getString("endDate");
-
-                    leagues.add(new League(id, name, countryName, startDate, endDate));
-                }
+                standings.add(new TeamInStanding(position, name, playedGames, won, draw, lost, points, goalsFor, goalsAgainst));
             }
 
-            insertLeaguesInDao(leagues, listener );
+            insertStandingsInDao(standings, listener );
             //tryagain.onResponse(dao.allLeagues());
         }
         catch (JSONException e)
         {
 
         }
+    }
+
+    private void insertStandingsInDao(ArrayList<TeamInStanding> standings, Listener<ArrayList<TeamInStanding>> listener) {
+
+        new AsyncTask<Void, Void, Void>(){
+
+            @Override
+            protected Void doInBackground(Void[] voids) {
+                dao.insertStanding(standings);
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                listener.onResponse(leagues);
+            }
+        }.execute();
     }
 }

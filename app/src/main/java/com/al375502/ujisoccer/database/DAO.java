@@ -16,6 +16,9 @@ public interface DAO {
     @Query("SELECT * FROM team WHERE league_id = :id ORDER BY name")
     List<Team> allTeamsInALeague(int id);
 
+    @Query("SELECT * FROM TeamInStanding ORDER BY position")
+    List<TeamInStanding> allStandings();
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertLeague(List<League> leagues);
 
