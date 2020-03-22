@@ -31,12 +31,13 @@ public class MainActivity extends AppCompatActivity {
     public TextView country, start, end;
     public Button standingsButton;
     int leagueId;
+    MainPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        MainPresenter presenter = new MainPresenter(this, Model.getInstance(getApplicationContext()));
+        presenter = new MainPresenter(this, Model.getInstance(getApplicationContext()));
 
         spinner = findViewById(R.id.spinner);
         country = findViewById(R.id.country);
@@ -78,20 +79,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void ChangeActivity(){
+        presenter.setLeagueForTeams(leagueId);
         Intent intent = new Intent(this, ListTeamActivity.class);
-        intent.putExtra(ListTeamActivity.LEAGUE, CreateInfo());
+        //intent.putExtra(ListTeamActivity.LEAGUE, CreateInfo());
         startActivity(intent);
     }
     public void FillSpinner(ArrayList<String> leagues){
-
         ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(this,
                 android.R.layout.simple_spinner_dropdown_item,
                 leagues);
         spinner.setAdapter(spinnerArrayAdapter);
     }
 
+    /*
     public GetInfo CreateInfo(){
         GetInfo getinfo = new GetInfo(Model.getInstance(getApplicationContext()), leagueId);
         return getinfo;
-    }
+    }*/
 }

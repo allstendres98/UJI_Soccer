@@ -149,4 +149,61 @@ public final class Model {
             }
         }.execute();
     }
+
+    public void updateTeams(final Listener<ArrayList<Team>> listener, Response.ErrorListener errorListener) {
+
+        JsonObjectRequest ObjectRequest = new JsonObjectRequest(Request.Method.GET, url+"/"+actualLeague+standings, null, new Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                FillDataBaseWithTeams(response, listener);
+            }
+        }, errorListener){
+            @Override
+            public Map<String, String> getHeaders(){
+                Map<String, String> headers = new HashMap<>();
+                headers.put("X-Auth-Token", "ec3c7112c4d840a6bfddc19172a19ce3");
+                return headers;
+            }
+        };
+        queue.add(ObjectRequest);
+    }
+
+    private void FillDataBaseWithTeams(JSONObject response, final Listener<ArrayList<Team>> listener){
+
+        ArrayList<Team> teams = new ArrayList<>();
+
+        try{
+            JSONArray array = response.getJSONArray("standings");
+            ArrayList<Integer> desiredLeagues = new ArrayList<Integer>(Arrays.asList(2021, 2015, 2002, 2019, 2003, 2017, 2014));
+
+
+            for(int i = 0; i < array.length(); i++){
+                boolean isIn = false;
+                JSONObject extractedleague = array.getJSONObject(i);
+
+                int id = extractedleague.getInt("id");
+                for(int j=0; j < desiredLeagues.size(); j++)
+                {
+                    if(id == desiredLeagues.get(j)) isIn = true;
+                }
+                if(isIn) {
+                    String name = extractedleague.getString("name");
+                    JSONObject area = extractedleague.getJSONObject("area");
+                    String countryName = area.getString("name");
+                    JSONObject currentSeason = extractedleague.getJSONObject("currentSeason");
+                    String startDate = currentSeason.getString("startDate");
+                    String endDate = currentSeason.getString("endDate");
+
+                    leagues.add(new League(id, name, countryName, startDate, endDate));
+                }
+            }
+
+            insertLeaguesInDao(leagues, listener );
+            //tryagain.onResponse(dao.allLeagues());
+        }
+        catch (JSONException e)
+        {
+
+        }
+    }
 }

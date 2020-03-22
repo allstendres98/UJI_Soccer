@@ -21,6 +21,10 @@ public class MainPresenter {
         GetLeagues();
     }
 
+    public void setLeagueForTeams(int id){
+        model.actualLeague = id;
+    }
+
     public void GetLeagues(){
         model.getLeagues(new Response.Listener<ArrayList<League>>() {
             @Override

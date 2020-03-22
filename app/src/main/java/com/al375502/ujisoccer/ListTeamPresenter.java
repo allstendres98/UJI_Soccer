@@ -14,16 +14,17 @@ public class ListTeamPresenter {
     Model model;
     int league;
 
-    public ListTeamPresenter(ListTeamActivity view, GetInfo getInfo) {
+    public ListTeamPresenter(ListTeamActivity view, Model model) {
         this.view = view;
-        this.model = getInfo.getModel();
-        this.league = getInfo.getLeagueId();
-        setLeague();
-        GetTeams();
+        this.model = model;
+        //this.league = getInfo.getLeagueId();
+        //setLeague();
+        //GetTeams();
     }
+    /*
     public void setLeague(){
         model.actualLeague = league;
-    }
+    }*/
 
     public void GetTeams(){
         model.getTeams(new Response.Listener<ArrayList<Team>>() {
@@ -36,14 +37,10 @@ public class ListTeamPresenter {
 
     private void onTeamsAvailable(ArrayList<Team> teams){
         if (teams.size() == 0) {
-            model.updateLeagues(new Response.Listener<ArrayList<Team>>() {
+            model.updateTeams(new Response.Listener<ArrayList<Team>>() {
                 @Override
                 public void onResponse(ArrayList<Team> teams) {
-                    ArrayList<String> names = new ArrayList<>();
-                    for (Team team:teams
-                    ) {
-                        names.add(team.);
-                    }
+
                     //view.FillSpinner(names);
                     //view.Leagues = leagues;
                     //Log.d("qwer", "onResponse: " + leagues);
