@@ -4,6 +4,7 @@ import android.widget.Toast;
 
 import com.al375502.ujisoccer.database.League;
 import com.al375502.ujisoccer.database.Team;
+import com.al375502.ujisoccer.database.TeamInStanding;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 
@@ -12,7 +13,6 @@ import java.util.ArrayList;
 public class ListTeamPresenter {
     ListTeamActivity view;
     Model model;
-    int league;
 
     public ListTeamPresenter(ListTeamActivity view, Model model) {
         this.view = view;
@@ -21,10 +21,20 @@ public class ListTeamPresenter {
         //setLeague();
         //GetTeams();
     }
-    /*
-    public void setLeague(){
-        model.actualLeague = league;
-    }*/
+
+    public void GetStandings(int league) {
+        model.updateTeams(league,new Response.Listener<ArrayList<TeamInStanding>>() {
+            @Override
+            public void onResponse(ArrayList<TeamInStanding> response) {
+                view.FillListView(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                processError(error.getMessage());
+            }
+        });
+    }
 
     public void GetTeams(){
         model.getTeams(new Response.Listener<ArrayList<Team>>() {
@@ -36,22 +46,6 @@ public class ListTeamPresenter {
     }
 
     private void onTeamsAvailable(ArrayList<Team> teams){
-        if (teams.size() == 0) {
-            model.updateTeams(new Response.Listener<ArrayList<Team>>() {
-                @Override
-                public void onResponse(ArrayList<Team> teams) {
-
-                    //view.FillSpinner(names);
-                    //view.Leagues = leagues;
-                    //Log.d("qwer", "onResponse: " + leagues);
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    processError(error.getMessage());
-                }
-            });
-        }
 
 
     }

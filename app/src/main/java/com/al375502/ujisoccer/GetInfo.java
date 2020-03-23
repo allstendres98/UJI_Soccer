@@ -1,4 +1,4 @@
-package com.al375502.ujisoccer;
+/*package com.al375502.ujisoccer;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -46,3 +46,4 @@ public class GetInfo implements Parcelable {
         dest.writeInt(leagueId);
     }
 }
+*/

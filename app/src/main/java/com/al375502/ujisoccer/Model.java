@@ -151,7 +151,7 @@ public final class Model {
         }.execute();
     }
 
-    public void updateTeams(final Listener<ArrayList<Team>> listener, Response.ErrorListener errorListener) {
+    public void updateTeams(int actualLeague,final Listener<ArrayList<TeamInStanding>> listener, Response.ErrorListener errorListener) {
 
         JsonObjectRequest ObjectRequest = new JsonObjectRequest(Request.Method.GET, url+"/"+actualLeague+standings, null, new Listener<JSONObject>() {
             @Override
@@ -196,8 +196,7 @@ public final class Model {
                 standings.add(new TeamInStanding(position, name, playedGames, won, draw, lost, points, goalsFor, goalsAgainst));
             }
 
-            insertStandingsInDao(standings, listener );
-            //tryagain.onResponse(dao.allLeagues());
+            listener.onResponse(standings);
         }
         catch (JSONException e)
         {
@@ -205,20 +204,4 @@ public final class Model {
         }
     }
 
-    private void insertStandingsInDao(ArrayList<TeamInStanding> standings, Listener<ArrayList<TeamInStanding>> listener) {
-
-        new AsyncTask<Void, Void, Void>(){
-
-            @Override
-            protected Void doInBackground(Void[] voids) {
-                dao.insertStanding(standings);
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                listener.onResponse(leagues);
-            }
-        }.execute();
-    }
 }

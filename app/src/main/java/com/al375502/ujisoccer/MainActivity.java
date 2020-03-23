@@ -79,9 +79,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void ChangeActivity(){
-        presenter.setLeagueForTeams(leagueId);
         Intent intent = new Intent(this, ListTeamActivity.class);
-        //intent.putExtra(ListTeamActivity.LEAGUE, CreateInfo());
+        intent.putExtra(ListTeamActivity.LEAGUE, leagueId);
         startActivity(intent);
     }
     public void FillSpinner(ArrayList<String> leagues){

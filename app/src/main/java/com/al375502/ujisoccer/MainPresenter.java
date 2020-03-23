@@ -21,10 +21,6 @@ public class MainPresenter {
         GetLeagues();
     }
 
-    public void setLeagueForTeams(int id){
-        model.actualLeague = id;
-    }
-
     public void GetLeagues(){
         model.getLeagues(new Response.Listener<ArrayList<League>>() {
             @Override
@@ -46,7 +42,6 @@ public class MainPresenter {
                     }
                     view.FillSpinner(names);
                     view.Leagues = leagues;
-                    //Log.d("qwer", "onResponse: " + leagues);
                 }
             }, new Response.ErrorListener() {
                 @Override
