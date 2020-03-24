@@ -193,8 +193,6 @@ public final class Model {
         } catch (JSONException ex) {
             ex.printStackTrace();
         }
-
-            //tryagain.onResponse(dao.allLeagues());
     }
 
     private void insertTeamsInDao(final ArrayList<Team> teams, final Listener<ArrayList<Team>> listener){
@@ -244,14 +242,14 @@ public final class Model {
                 JSONObject teamInStanding = table.getJSONObject(i);
                 JSONObject team = teamInStanding.getJSONObject("team");
 
-                String name = team.getString("name");
-                int position = teamInStanding.getInt("position");
-                int playedGames = teamInStanding.getInt("playedGames");
-                int won = teamInStanding.getInt("won");
-                int draw = teamInStanding.getInt("draw");
-                int lost = teamInStanding.getInt("lost");
-                int points = teamInStanding.getInt("points");
-                int goalsFor = teamInStanding.getInt("goalsFor");
+                String name      = team.getString("name");
+                int position     = teamInStanding.getInt("position");
+                int playedGames  = teamInStanding.getInt("playedGames");
+                int won          = teamInStanding.getInt("won");
+                int draw         = teamInStanding.getInt("draw");
+                int lost         = teamInStanding.getInt("lost");
+                int points       = teamInStanding.getInt("points");
+                int goalsFor     = teamInStanding.getInt("goalsFor");
                 int goalsAgainst = teamInStanding.getInt("goalsAgainst");
 
 

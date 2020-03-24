@@ -17,13 +17,10 @@ public class ListTeamPresenter {
     public ListTeamPresenter(ListTeamActivity view, Model model) {
         this.view = view;
         this.model = model;
-        //this.league = getInfo.getLeagueId();
-        //setLeague();
-        //GetTeams();
     }
 
-    public void GetStandings(int league) {
-        model.updateStandings(league,new Response.Listener<ArrayList<TeamInStanding>>() {
+    public void GetStandingsAndTeams(final int league_id) {
+        model.updateStandings(league_id,new Response.Listener<ArrayList<TeamInStanding>>() {
             @Override
             public void onResponse(ArrayList<TeamInStanding> response) {
                 view.FillListView(response);
@@ -34,9 +31,7 @@ public class ListTeamPresenter {
                 processError(error.getMessage());
             }
         });
-    }
 
-    public void GetTeams(final int league_id){
         model.getTeams(new Response.Listener<ArrayList<Team>>() {
             @Override
             public void onResponse(ArrayList<Team> response) {
@@ -50,13 +45,7 @@ public class ListTeamPresenter {
             model.updateTeams(league_id, new Response.Listener<ArrayList<Team>>() {
                 @Override
                 public void onResponse(ArrayList<Team> teams) {
-                    ArrayList<String> names = new ArrayList<>();
-                    for (Team team:teams
-                    ) {
-                        names.add(team.name);
-                    }
-
-                    //put in in VIEW
+                    view.PopUpTeam(teams);
                 }
             }, new Response.ErrorListener() {
                 @Override
