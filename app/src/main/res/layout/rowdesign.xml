@@ -7,9 +7,9 @@
 
     <TextView
         android:id="@+id/posT"
-        android:layout_width="wrap_content"
+        android:layout_width="16dp"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="22"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -17,79 +17,86 @@
         android:id="@+id/teamT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:text="TextView"
+        android:text="FC Girondins de Bordeaux"
+        app:layout_constraintEnd_toStartOf="@+id/plT"
+        app:layout_constraintHorizontal_bias="0.3"
         app:layout_constraintStart_toEndOf="@+id/posT"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/plT"
-        android:layout_width="wrap_content"
+        android:layout_width="19dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:text="TextView"
-        app:layout_constraintStart_toEndOf="@+id/teamT"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginEnd="2dp"
+        android:layout_marginRight="2dp"
+        android:gravity="center_horizontal"
+        android:text="11"
+        app:layout_constraintBaseline_toBaselineOf="@+id/gaT"
+        app:layout_constraintEnd_toStartOf="@+id/wT" />
 
     <TextView
         android:id="@+id/wT"
-        android:layout_width="wrap_content"
+        android:layout_width="16dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:text="TextView"
-        app:layout_constraintStart_toEndOf="@+id/plT"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginEnd="2dp"
+        android:layout_marginRight="2dp"
+        android:gravity="center_horizontal"
+        android:text="11"
+        android:textColor="#0D6D01"
+        app:layout_constraintBaseline_toBaselineOf="@+id/gaT"
+        app:layout_constraintEnd_toStartOf="@+id/dT" />
 
     <TextView
         android:id="@+id/dT"
-        android:layout_width="wrap_content"
+        android:layout_width="16dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:text="TextView"
-        app:layout_constraintStart_toEndOf="@+id/wT"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginEnd="2dp"
+        android:layout_marginRight="2dp"
+        android:gravity="center_horizontal"
+        android:text="11"
+        app:layout_constraintBaseline_toBaselineOf="@+id/gaT"
+        app:layout_constraintEnd_toStartOf="@+id/lT" />
 
     <TextView
         android:id="@+id/lT"
-        android:layout_width="wrap_content"
+        android:layout_width="16dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:text="TextView"
-        app:layout_constraintStart_toEndOf="@+id/dT"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginEnd="2dp"
+        android:layout_marginRight="2dp"
+        android:gravity="center_horizontal"
+        android:text="11"
+        android:textColor="#8F0303"
+        app:layout_constraintBaseline_toBaselineOf="@+id/gaT"
+        app:layout_constraintEnd_toStartOf="@+id/ptT" />
 
     <TextView
         android:id="@+id/ptT"
-        android:layout_width="wrap_content"
+        android:layout_width="19dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:text="TextView"
-        app:layout_constraintStart_toEndOf="@+id/lT"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginEnd="2dp"
+        android:layout_marginRight="2dp"
+        android:gravity="center_horizontal"
+        android:text="11"
+        app:layout_constraintBaseline_toBaselineOf="@+id/gaT"
+        app:layout_constraintEnd_toStartOf="@+id/gfT" />
 
     <TextView
         android:id="@+id/gfT"
-        android:layout_width="wrap_content"
+        android:layout_width="19dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:text="TextView"
-        app:layout_constraintStart_toEndOf="@+id/ptT"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginEnd="2dp"
+        android:layout_marginRight="2dp"
+        android:gravity="center_horizontal"
+        android:text="11"
+        app:layout_constraintBaseline_toBaselineOf="@+id/gaT"
+        app:layout_constraintEnd_toStartOf="@+id/gaT" />
 
     <TextView
         android:id="@+id/gaT"
-        android:layout_width="wrap_content"
+        android:layout_width="19dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:text="TextView"
-        app:layout_constraintStart_toEndOf="@+id/gfT"
+        android:gravity="center_horizontal"
+        android:text="11"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

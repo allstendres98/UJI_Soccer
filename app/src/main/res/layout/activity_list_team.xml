@@ -21,7 +21,6 @@
         android:layout_height="wrap_content"
         android:text="TEAM"
         app:layout_constraintEnd_toStartOf="@+id/pl"
-        app:layout_constraintHorizontal_bias="0.39"
         app:layout_constraintStart_toEndOf="@+id/pos"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,76 +34,85 @@
 
     <TextView
         android:id="@+id/pl"
-        android:layout_width="wrap_content"
+        android:layout_width="19dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginRight="2dp"
+        android:gravity="center_horizontal"
         android:text="PL"
         app:layout_constraintEnd_toStartOf="@+id/w"
         app:layout_constraintTop_toTopOf="@+id/data" />
 
     <TextView
         android:id="@+id/w"
-        android:layout_width="wrap_content"
+        android:layout_width="16dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginRight="2dp"
+        android:gravity="center_horizontal"
         android:text="W"
+        android:textColor="#0D6D01"
         app:layout_constraintEnd_toStartOf="@+id/d"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/d"
-        android:layout_width="wrap_content"
+        android:layout_width="16dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginRight="2dp"
+        android:gravity="center_horizontal"
         android:text="D"
         app:layout_constraintEnd_toStartOf="@+id/l"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/l"
-        android:layout_width="wrap_content"
+        android:layout_width="16dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginRight="2dp"
+        android:gravity="center_horizontal"
         android:text="L"
+        android:textColor="#8F0303"
         app:layout_constraintEnd_toStartOf="@+id/pt"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/pt"
-        android:layout_width="wrap_content"
+        android:layout_width="19dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginRight="2dp"
+        android:gravity="center_horizontal"
         android:text="PT"
         app:layout_constraintEnd_toStartOf="@+id/gf"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/gf"
-        android:layout_width="wrap_content"
+        android:layout_width="19dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginRight="2dp"
+        android:gravity="center_horizontal"
         android:text="GF"
         app:layout_constraintEnd_toStartOf="@+id/ga"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/ga"
-        android:layout_width="wrap_content"
+        android:layout_width="19dp"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
         android:text="GA"
         app:layout_constraintEnd_toEndOf="@+id/data"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
         android:id="@+id/listView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:background="#00FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
