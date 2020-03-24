@@ -49,15 +49,15 @@ public class MyAdapter extends BaseAdapter {
         TextView gfT = (TextView) convertView.findViewById(R.id.gfT);
         TextView gaT = (TextView) convertView.findViewById(R.id.gaT);
 
-        posT.setText(arr.get(position).position);
-        teamT.setText(arr.get(position).name);
-        plT.setText(arr.get(position).playedGames);
-        wT.setText(arr.get(position).won);
-        dT.setText(arr.get(position).draw);
-        lT.setText(arr.get(position).lost);
-        ptT.setText(arr.get(position).points);
-        gfT.setText(arr.get(position).goalsFor);
-        gaT.setText(arr.get(position).goalsAgainst);
+        posT.setText("" + arr.get(position).position);
+        teamT.setText("" + arr.get(position).name);
+        plT.setText("" + arr.get(position).playedGames);
+        wT.setText("" + arr.get(position).won);
+        dT.setText("" + arr.get(position).draw);
+        lT.setText("" + arr.get(position).lost);
+        ptT.setText("" + arr.get(position).points);
+        gfT.setText("" + arr.get(position).goalsFor);
+        gaT.setText("" + arr.get(position).goalsAgainst);
 
         return convertView;
     }
