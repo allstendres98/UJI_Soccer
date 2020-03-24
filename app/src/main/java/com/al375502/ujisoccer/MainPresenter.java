@@ -41,6 +41,7 @@ public class MainPresenter {
                         names.add(league.name);
                     }
                     view.FillSpinner(names);
+                    view.Leagues = leagues;
                 }
             }, new Response.ErrorListener() {
                 @Override

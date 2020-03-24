@@ -50,17 +50,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 String leagueName = parentView.getSelectedItem().toString();
-                for(int i = 0; i < Leagues.size(); i++)
-                {
-                    if(Leagues.get(i).name == leagueName)
-                    {
-                        leagueId = Leagues.get(i).id;
-                        standingsButton.setEnabled(true);
-                        country.setText(Leagues.get(i).country);
-                        start.setText(Leagues.get(i).start);
-                        end.setText(Leagues.get(i).end+"");
+                //if(Leagues.size() != 0){
+                    for (int i = 0; i < Leagues.size(); i++) {
+                        if (Leagues.get(i).name == leagueName) {
+                            leagueId = Leagues.get(i).id;
+                            standingsButton.setEnabled(true);
+                            country.setText(Leagues.get(i).country);
+                            start.setText(Leagues.get(i).start);
+                            end.setText(Leagues.get(i).end + "");
+                        }
                     }
-                }
+              //  }
             }
 
             @Override
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra(ListTeamActivity.LEAGUE, leagueId);
         startActivity(intent);
     }
-    public void FillSpinner(ArrayList<String> leagues){
+    public void FillSpinner(final ArrayList<String> leagues){
         ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(this,
                 android.R.layout.simple_spinner_dropdown_item,
                 leagues);
