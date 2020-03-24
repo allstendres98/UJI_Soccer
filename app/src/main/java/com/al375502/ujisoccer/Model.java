@@ -179,7 +179,7 @@ public final class Model {
             JSONArray  table = standing.getJSONArray("table");
 
             for(int i = 0; i < table.length(); i++){
-                JSONObject teamInStanding = array.getJSONObject(i);
+                JSONObject teamInStanding = table.getJSONObject(i);
                 JSONObject team = teamInStanding.getJSONObject("team");
 
                 String name = team.getString("name");
