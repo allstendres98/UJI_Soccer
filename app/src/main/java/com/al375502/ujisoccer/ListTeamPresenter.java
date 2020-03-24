@@ -23,7 +23,7 @@ public class ListTeamPresenter {
     }
 
     public void GetStandings(int league) {
-        model.updateTeams(league,new Response.Listener<ArrayList<TeamInStanding>>() {
+        model.updateStandings(league,new Response.Listener<ArrayList<TeamInStanding>>() {
             @Override
             public void onResponse(ArrayList<TeamInStanding> response) {
                 view.FillListView(response);
@@ -36,19 +36,38 @@ public class ListTeamPresenter {
         });
     }
 
-    public void GetTeams(){
+    public void GetTeams(final int league_id){
         model.getTeams(new Response.Listener<ArrayList<Team>>() {
             @Override
             public void onResponse(ArrayList<Team> response) {
-                //onLeagueAvailable(response);
+                onTeamsAvailable(response, league_id);
             }
         });
     }
 
-    private void onTeamsAvailable(ArrayList<Team> teams){
+    private void onTeamsAvailable(ArrayList<Team> teams, int league_id){
+        if (teams.size() == 0) {
+            model.updateTeams(league_id, new Response.Listener<ArrayList<Team>>() {
+                @Override
+                public void onResponse(ArrayList<Team> teams) {
+                    ArrayList<String> names = new ArrayList<>();
+                    for (Team team:teams
+                    ) {
+                        names.add(team.name);
+                    }
 
+                    //put in in VIEW
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    processError(error.getMessage());
+                }
+            });
+        }
 
     }
+
 
     public void processError(String e) {
         Toast toast = Toast.makeText(view ,e,
