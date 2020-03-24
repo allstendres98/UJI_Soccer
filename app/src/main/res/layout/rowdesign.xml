@@ -17,6 +17,8 @@
         android:id="@+id/teamT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:text="TextView"
         app:layout_constraintStart_toEndOf="@+id/posT"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,6 +27,8 @@
         android:id="@+id/plT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:text="TextView"
         app:layout_constraintStart_toEndOf="@+id/teamT"
         app:layout_constraintTop_toTopOf="parent" />
@@ -33,6 +37,8 @@
         android:id="@+id/wT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:text="TextView"
         app:layout_constraintStart_toEndOf="@+id/plT"
         app:layout_constraintTop_toTopOf="parent" />
@@ -41,6 +47,8 @@
         android:id="@+id/dT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:text="TextView"
         app:layout_constraintStart_toEndOf="@+id/wT"
         app:layout_constraintTop_toTopOf="parent" />
@@ -49,6 +57,8 @@
         android:id="@+id/lT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:text="TextView"
         app:layout_constraintStart_toEndOf="@+id/dT"
         app:layout_constraintTop_toTopOf="parent" />
@@ -57,6 +67,8 @@
         android:id="@+id/ptT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:text="TextView"
         app:layout_constraintStart_toEndOf="@+id/lT"
         app:layout_constraintTop_toTopOf="parent" />
@@ -65,6 +77,8 @@
         android:id="@+id/gfT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:text="TextView"
         app:layout_constraintStart_toEndOf="@+id/ptT"
         app:layout_constraintTop_toTopOf="parent" />
@@ -73,6 +87,8 @@
         android:id="@+id/gaT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:text="TextView"
         app:layout_constraintStart_toEndOf="@+id/gfT"
         app:layout_constraintTop_toTopOf="parent" />
