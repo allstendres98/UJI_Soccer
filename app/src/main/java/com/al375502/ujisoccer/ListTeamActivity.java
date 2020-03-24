@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -18,6 +21,7 @@ public class ListTeamActivity extends AppCompatActivity {
     ListView listView;
     MyAdapter adapter;
     ArrayList<Team> teams;
+    ArrayList<TeamInStanding> teamInStandings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +35,24 @@ public class ListTeamActivity extends AppCompatActivity {
         final ListTeamPresenter presenter = new ListTeamPresenter(this, Model.getInstance(getApplicationContext()));
         presenter.GetStandingsAndTeams(league_id);
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String teamSelected = "";
+                for(int i = 0; i < teamInStandings.size(); i++)
+                {
+                    if(teamInStandings.get(i).position == position+1){
+                        teamSelected = teamInStandings.get(i).name;
+                    }
+                }
+
+                Log.d("Equipo",teamSelected);
+            }
+        });
     }
 
     public void FillListView(ArrayList<TeamInStanding> response) {
+        teamInStandings = response;
         adapter = new MyAdapter(this, response);
         listView.setAdapter(adapter);
     }
