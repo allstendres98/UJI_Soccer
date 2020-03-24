@@ -151,9 +151,11 @@ public final class Model {
         }.execute();
     }
 
-    public void updateTeams(int actualLeague,final Listener<ArrayList<TeamInStanding>> listener, Response.ErrorListener errorListener) {
 
-        JsonObjectRequest ObjectRequest = new JsonObjectRequest(Request.Method.GET, url+"/"+actualLeague+standings, null, new Listener<JSONObject>() {
+
+    public void updateTeams(int league_id, final Listener<ArrayList<Team>> listener, Response.ErrorListener errorListener) {
+
+        JsonObjectRequest ObjectRequest = new JsonObjectRequest(Request.Method.GET, url+"/"+league_id+teams, null, new Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 FillDataBaseWithTeams(response, listener);
@@ -169,7 +171,67 @@ public final class Model {
         queue.add(ObjectRequest);
     }
 
-    private void FillDataBaseWithTeams(JSONObject response, final Listener<ArrayList<TeamInStanding>> listener){
+    private void FillDataBaseWithTeams(JSONObject response, final Listener<ArrayList<Team>> listener){
+        ArrayList<Team> teams = new ArrayList<>();
+        try{
+            JSONArray teamstable = response.getJSONArray("teams");
+            for(int i = 0; i < teamstable.length(); i++){
+                JSONObject extractedteam = teamstable.getJSONObject(i);
+
+                int id            = extractedteam.getInt("id");
+                String name       = extractedteam.getString("name");
+                String shortName  = extractedteam.getString("shortName");
+                String stadium    = extractedteam.getString("venue");
+                String colors     = extractedteam.getString("clubColors");
+                String website    = extractedteam.getString("website");
+                int founded       = extractedteam.getInt("founded");
+
+                teams.add(new Team(id, name, shortName, stadium, colors, website, founded,3 ));
+            }
+            insertTeamsInDao(teams, listener );
+
+        } catch (JSONException ex) {
+            ex.printStackTrace();
+        }
+
+            //tryagain.onResponse(dao.allLeagues());
+    }
+
+    private void insertTeamsInDao(final ArrayList<Team> teams, final Listener<ArrayList<Team>> listener){
+        new AsyncTask<Void, Void, Void>(){
+
+            @Override
+            protected Void doInBackground(Void[] voids) {
+                dao.insertTeams(teams);
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                listener.onResponse(teams);
+            }
+        }.execute();
+    }
+
+    public void updateStandings(int actualLeague,final Listener<ArrayList<TeamInStanding>> listener, Response.ErrorListener errorListener) {
+
+        JsonObjectRequest ObjectRequest = new JsonObjectRequest(Request.Method.GET, url+"/"+actualLeague+standings, null, new Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                GetTeamInStandingArray(response, listener);
+            }
+        }, errorListener){
+            @Override
+            public Map<String, String> getHeaders(){
+                Map<String, String> headers = new HashMap<>();
+                headers.put("X-Auth-Token", "ec3c7112c4d840a6bfddc19172a19ce3");
+                return headers;
+            }
+        };
+        queue.add(ObjectRequest);
+    }
+
+    private void GetTeamInStandingArray(JSONObject response, final Listener<ArrayList<TeamInStanding>> listener){
 
         ArrayList<TeamInStanding> standings = new ArrayList<>();
 
@@ -203,5 +265,4 @@ public final class Model {
 
         }
     }
-
 }
