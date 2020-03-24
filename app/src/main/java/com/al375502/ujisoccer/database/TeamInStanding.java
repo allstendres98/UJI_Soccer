@@ -23,5 +23,4 @@ public class TeamInStanding {
         this.goalsFor = goalsFor;
         this.goalsAgainst = goalsAgainst;
     }
-
 }

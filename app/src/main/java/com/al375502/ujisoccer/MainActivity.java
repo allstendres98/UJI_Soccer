@@ -33,12 +33,12 @@ public class MainActivity extends AppCompatActivity {
     int leagueId;
     MainPresenter presenter;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         presenter = new MainPresenter(this, Model.getInstance(getApplicationContext()));
-
         spinner = findViewById(R.id.spinner);
         country = findViewById(R.id.country);
         start = findViewById(R.id.start);

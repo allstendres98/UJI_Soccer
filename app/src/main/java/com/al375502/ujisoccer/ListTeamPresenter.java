@@ -20,7 +20,7 @@ public class ListTeamPresenter {
     }
 
     public void GetStandingsAndTeams(final int league_id) {
-        model.updateStandings(league_id,new Response.Listener<ArrayList<TeamInStanding>>() {
+        model.updateStandings(league_id, new Response.Listener<ArrayList<TeamInStanding>>() {
             @Override
             public void onResponse(ArrayList<TeamInStanding> response) {
                 view.FillListView(response);
@@ -32,7 +32,7 @@ public class ListTeamPresenter {
             }
         });
 
-        model.getTeams(new Response.Listener<ArrayList<Team>>() {
+        model.getTeams(league_id, new Response.Listener<ArrayList<Team>>() {
             @Override
             public void onResponse(ArrayList<Team> response) {
                 onTeamsAvailable(response, league_id);

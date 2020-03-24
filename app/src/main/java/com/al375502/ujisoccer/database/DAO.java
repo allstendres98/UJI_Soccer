@@ -5,7 +5,6 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Dao
@@ -19,6 +18,6 @@ public interface DAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertLeague(List<League> leagues);
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertTeams(List<Team> teams);
 }

@@ -19,17 +19,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-
-
 public final class Model {
     DAO dao;
-    int actualLeague;
     public static final String url = "https://api.football-data.org/v2/competitions";
     public static final String competitions = "?plan=TIER_ONE";
     public static final String standings = "/standings";
@@ -50,7 +46,6 @@ public final class Model {
         }
         return model;
     }
-
 
     public void getLeagues(final Listener<ArrayList<League> > leagueresponse){
         new AsyncTask<Void, Void, ArrayList<League>>(){
@@ -102,19 +97,18 @@ public final class Model {
                     if(id == desiredLeagues.get(j)) isIn = true;
                 }
                 if(isIn) {
-                    String name = extractedleague.getString("name");
-                    JSONObject area = extractedleague.getJSONObject("area");
-                    String countryName = area.getString("name");
+                    String name              = extractedleague.getString("name");
+                    JSONObject area          = extractedleague.getJSONObject("area");
+                    String countryName       = area.getString("name");
                     JSONObject currentSeason = extractedleague.getJSONObject("currentSeason");
-                    String startDate = currentSeason.getString("startDate");
-                    String endDate = currentSeason.getString("endDate");
+                    String startDate         = currentSeason.getString("startDate");
+                    String endDate           = currentSeason.getString("endDate");
 
                     leagues.add(new League(id, name, countryName, startDate, endDate));
                 }
             }
 
             insertLeaguesInDao(leagues, listener );
-            //tryagain.onResponse(dao.allLeagues());
         }
         catch (JSONException e)
         {
@@ -138,11 +132,11 @@ public final class Model {
         }.execute();
     }
 
-    public void getTeams(final Listener<ArrayList<Team>> teamresponse) {
+    public void getTeams(final int league_id,final Listener<ArrayList<Team>> teamresponse) {
         new AsyncTask<Void, Void, ArrayList<Team>>(){
             @Override
             protected ArrayList<Team> doInBackground(Void... voids) {
-                return new ArrayList<>(dao.allTeamsInALeague(actualLeague));
+                return new ArrayList<>(dao.allTeamsInALeague(league_id));
             }
             @Override
             protected void onPostExecute(ArrayList<Team> teams) {
@@ -150,8 +144,6 @@ public final class Model {
             }
         }.execute();
     }
-
-
 
     public void updateTeams(int league_id, final Listener<ArrayList<Team>> listener, Response.ErrorListener errorListener) {
 
@@ -177,6 +169,7 @@ public final class Model {
             JSONArray teamstable = response.getJSONArray("teams");
             for(int i = 0; i < teamstable.length(); i++){
                 JSONObject extractedteam = teamstable.getJSONObject(i);
+                JSONObject area = extractedteam.getJSONObject("area");
 
                 int id            = extractedteam.getInt("id");
                 String name       = extractedteam.getString("name");
@@ -185,10 +178,11 @@ public final class Model {
                 String colors     = extractedteam.getString("clubColors");
                 String website    = extractedteam.getString("website");
                 int founded       = extractedteam.getInt("founded");
+                int league_id     = area.getInt("id");
 
-                teams.add(new Team(id, name, shortName, stadium, colors, website, founded,3 ));
+                teams.add(new Team(id, name, shortName, stadium, colors, website, founded, league_id)); //REVISAAAAR Y COMPROBAR
             }
-            insertTeamsInDao(teams, listener );
+            insertTeamsInDao(teams, listener);
 
         } catch (JSONException ex) {
             ex.printStackTrace();
@@ -197,7 +191,6 @@ public final class Model {
 
     private void insertTeamsInDao(final ArrayList<Team> teams, final Listener<ArrayList<Team>> listener){
         new AsyncTask<Void, Void, Void>(){
-
             @Override
             protected Void doInBackground(Void[] voids) {
                 dao.insertTeams(teams);
