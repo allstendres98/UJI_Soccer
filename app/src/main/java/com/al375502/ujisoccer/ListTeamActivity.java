@@ -35,7 +35,7 @@ public class ListTeamActivity extends AppCompatActivity {
         final ListTeamPresenter presenter = new ListTeamPresenter(this, Model.getInstance(getApplicationContext()));
         presenter.GetStandingsAndTeams(league_id);
 
-       /* listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String teamSelected = "";
@@ -48,8 +48,10 @@ public class ListTeamActivity extends AppCompatActivity {
 
                 Log.d("Equipo",teamSelected);
             }
-        });*/
+        });
     }
+
+    //EL PROBLEMA ERA EL PUTO FillDataBaseWithTeams del Model, porque por alguna puta razon, el año de fundación de algunos equipos era null, y yo intentaba pillar entero y petaba jaja xd
 
     public void FillListView(ArrayList<TeamInStanding> response) {
         teamInStandings = response;

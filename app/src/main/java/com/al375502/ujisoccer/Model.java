@@ -2,6 +2,7 @@ package com.al375502.ujisoccer;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import androidx.room.Room;
 
@@ -165,11 +166,12 @@ public final class Model {
 
     private void FillDataBaseWithTeams(JSONObject response, final Listener<ArrayList<Team>> listener){
         ArrayList<Team> teams = new ArrayList<>();
+
         try{
             JSONArray teamstable = response.getJSONArray("teams");
+            JSONObject competition = response.getJSONObject("competition");
             for(int i = 0; i < teamstable.length(); i++){
                 JSONObject extractedteam = teamstable.getJSONObject(i);
-                JSONObject area = extractedteam.getJSONObject("area");
 
                 int id            = extractedteam.getInt("id");
                 String name       = extractedteam.getString("name");
@@ -177,8 +179,9 @@ public final class Model {
                 String stadium    = extractedteam.getString("venue");
                 String colors     = extractedteam.getString("clubColors");
                 String website    = extractedteam.getString("website");
-                int founded       = extractedteam.getInt("founded");
-                int league_id     = area.getInt("id");
+                int founded       = extractedteam.isNull("founded")? 0 : extractedteam.getInt("founded");
+                int league_id     = competition.getInt("id");
+                Log.d("ANO", "FUNDACION del : "+name+", " + founded);
 
                 teams.add(new Team(id, name, shortName, stadium, colors, website, founded, league_id)); //REVISAAAAR Y COMPROBAR
             }
@@ -187,6 +190,7 @@ public final class Model {
         } catch (JSONException ex) {
             ex.printStackTrace();
         }
+
     }
 
     private void insertTeamsInDao(final ArrayList<Team> teams, final Listener<ArrayList<Team>> listener){
@@ -203,6 +207,7 @@ public final class Model {
             }
         }.execute();
     }
+
 
     public void updateStandings(int actualLeague,final Listener<ArrayList<TeamInStanding>> listener, Response.ErrorListener errorListener) {
 
