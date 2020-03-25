@@ -291,7 +291,7 @@ public final class Model {
                 JSONObject human = array.getJSONObject(i);
 
                 String name     = human.getString("name");
-                String position = human.isNull("position")? "coach" : human.getString("position");
+                String position = human.isNull("position")? "Coach" : human.getString("position");
                 String role     = human.getString("role");
 
                 squads.add(new Squad(role, position, name));
