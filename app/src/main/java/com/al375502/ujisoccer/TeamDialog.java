@@ -47,7 +47,7 @@ public class TeamDialog extends AppCompatDialogFragment {
 
             }
         });
-        builder.setNegativeButton("NEXT MATCHES", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("SQUAD", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
