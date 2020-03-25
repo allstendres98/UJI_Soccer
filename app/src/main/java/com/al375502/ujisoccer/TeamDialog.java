@@ -60,7 +60,7 @@ public class TeamDialog extends AppCompatDialogFragment {
         cc = viewInflate.findViewById(R.id.cc);
 
             sh.setText(teamSelected.shortName + "");
-            f.setText(teamSelected.yearFoundation + "");
+            f.setText(teamSelected.yearFoundation == 0? "----" : teamSelected.yearFoundation+"");
             st.setText(teamSelected.stadium + "");
             cc.setText(teamSelected.colours + "");
 

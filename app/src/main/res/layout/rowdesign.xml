@@ -9,6 +9,8 @@
         android:id="@+id/posT"
         android:layout_width="16dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginLeft="1dp"
         android:text="22"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -19,7 +21,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="3dp"
         android:layout_marginLeft="3dp"
-        android:text="FC Girondins de Bordeaux"
+        android:maxLength="20"
+        android:text="FC Girondins de Bordeaux sdfsdfsdfsdfsdf"
+        app:chainUseRtl="false"
         app:layout_constraintEnd_toStartOf="@+id/plT"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/posT"
@@ -73,32 +77,32 @@
 
     <TextView
         android:id="@+id/ptT"
-        android:layout_width="19dp"
+        android:layout_width="24dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="2dp"
         android:layout_marginRight="2dp"
         android:gravity="center_horizontal"
-        android:text="11"
+        android:text="111"
         app:layout_constraintBaseline_toBaselineOf="@+id/gaT"
         app:layout_constraintEnd_toStartOf="@+id/gfT" />
 
     <TextView
         android:id="@+id/gfT"
-        android:layout_width="19dp"
+        android:layout_width="24dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="2dp"
         android:layout_marginRight="2dp"
         android:gravity="center_horizontal"
-        android:text="11"
+        android:text="111"
         app:layout_constraintBaseline_toBaselineOf="@+id/gaT"
         app:layout_constraintEnd_toStartOf="@+id/gaT" />
 
     <TextView
         android:id="@+id/gaT"
-        android:layout_width="19dp"
+        android:layout_width="24dp"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:text="11"
+        android:text="111"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
