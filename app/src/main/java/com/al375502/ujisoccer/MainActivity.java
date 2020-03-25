@@ -50,17 +50,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 String leagueName = parentView.getSelectedItem().toString();
-                //if(Leagues.size() != 0){
-                    for (int i = 0; i < Leagues.size(); i++) {
-                        if (Leagues.get(i).name == leagueName) {
-                            leagueId = Leagues.get(i).id;
-                            standingsButton.setEnabled(true);
-                            country.setText(Leagues.get(i).country);
-                            start.setText(Leagues.get(i).start);
-                            end.setText(Leagues.get(i).end + "");
-                        }
+                for (int i = 0; i < Leagues.size(); i++) {
+                    if (Leagues.get(i).name == leagueName) {
+                        leagueId = Leagues.get(i).id;
+                        standingsButton.setEnabled(true);
+                        country.setText(Leagues.get(i).country);
+                        start.setText(Leagues.get(i).start);
+                        end.setText(Leagues.get(i).end + "");
                     }
-              //  }
+                }
+
             }
 
             @Override
@@ -90,9 +89,4 @@ public class MainActivity extends AppCompatActivity {
         spinner.setAdapter(spinnerArrayAdapter);
     }
 
-    /*
-    public GetInfo CreateInfo(){
-        GetInfo getinfo = new GetInfo(Model.getInstance(getApplicationContext()), leagueId);
-        return getinfo;
-    }*/
 }

@@ -9,6 +9,7 @@ import androidx.room.Room;
 import com.al375502.ujisoccer.database.DAO;
 import com.al375502.ujisoccer.database.Database;
 import com.al375502.ujisoccer.database.League;
+import com.al375502.ujisoccer.database.Squad;
 import com.al375502.ujisoccer.database.Team;
 import com.al375502.ujisoccer.database.TeamInStanding;
 import com.android.volley.*;
@@ -47,7 +48,6 @@ public final class Model {
         }
         return model;
     }
-
     public void getLeagues(final Listener<ArrayList<League> > leagueresponse){
         new AsyncTask<Void, Void, ArrayList<League>>(){
             @Override
@@ -255,6 +255,48 @@ public final class Model {
             }
 
             listener.onResponse(standings);
+        }
+        catch (JSONException e)
+        {
+
+        }
+    }
+
+    public void updateSquad(int actualTeam, final Listener<ArrayList<Squad>> listener, Response.ErrorListener errorListener) {
+
+        JsonObjectRequest ObjectRequest = new JsonObjectRequest(Request.Method.GET, "https://api.football-data.org/v2/teams/"+actualTeam, null, new Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                GetTeamSquad(response, listener);
+            }
+        }, errorListener){
+            @Override
+            public Map<String, String> getHeaders(){
+                Map<String, String> headers = new HashMap<>();
+                headers.put("X-Auth-Token", "ec3c7112c4d840a6bfddc19172a19ce3");
+                return headers;
+            }
+        };
+        queue.add(ObjectRequest);
+    }
+
+    private void GetTeamSquad(JSONObject response, final Listener<ArrayList<Squad>> listener){
+
+        ArrayList<Squad> squads = new ArrayList<>();
+
+        try{
+            JSONArray array = response.getJSONArray("squad");
+
+            for(int i = 0; i < array.length(); i++){
+                JSONObject human = array.getJSONObject(i);
+
+                String name     = human.getString("name");
+                String position = human.isNull("position")? "coach" : human.getString("position");
+                String role     = human.getString("role");
+
+                squads.add(new Squad(role, position, name));
+            }
+            listener.onResponse(squads);
         }
         catch (JSONException e)
         {

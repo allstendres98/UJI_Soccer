@@ -2,7 +2,6 @@ package com.al375502.ujisoccer;
 
 import android.widget.Toast;
 
-import com.al375502.ujisoccer.database.League;
 import com.al375502.ujisoccer.database.Team;
 import com.al375502.ujisoccer.database.TeamInStanding;
 import com.android.volley.Response;

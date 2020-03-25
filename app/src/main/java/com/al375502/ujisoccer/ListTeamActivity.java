@@ -63,14 +63,9 @@ public class ListTeamActivity extends AppCompatActivity {
                         teamDialog.show(getSupportFragmentManager(),"team dialog");
                     }
                 }
-
-                //
             }
         });
     }
-
-    //EL PROBLEMA ERA EL FillDataBaseWithTeams del Model, porque por alguna razon, el año de fundación de algunos equipos era null, y yo intentaba pillar entero y petaba jaja xd
-
     public void FillListView(ArrayList<TeamInStanding> response) {
         teamInStandings = response;
         adapter = new MyAdapter(this, response);
@@ -81,11 +76,14 @@ public class ListTeamActivity extends AppCompatActivity {
         teams = allteams;
     }
 
+    public void ChangeActivity(int team_id){
+        Intent intent = new Intent(this, SquadActivity.class);
+        intent.putExtra(SquadActivity.TEAM, team_id);
+        startActivity(intent);
+    }
+
     public void GetIntoWebsite(String url)
     {
-        /*WebView webView = new WebView(this);
-        setContentView(webView);
-        webView.loadUrl(teamWeb);*/
         try {
             Uri webpage = Uri.parse(url);
             Intent myIntent = new Intent(Intent.ACTION_VIEW, webpage);
