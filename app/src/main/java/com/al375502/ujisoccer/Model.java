@@ -48,7 +48,7 @@ public final class Model {
         }
         return model;
     }
-    public void getLeagues(final Listener<ArrayList<League> > leagueresponse){
+    public void getLeagues(final Listener<ArrayList<League>> leagueresponse){
         new AsyncTask<Void, Void, ArrayList<League>>(){
             @Override
             protected ArrayList<League> doInBackground(Void... voids) {

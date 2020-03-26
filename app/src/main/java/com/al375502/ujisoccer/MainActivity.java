@@ -82,10 +82,16 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra(ListTeamActivity.LEAGUE, leagueId);
         startActivity(intent);
     }
-    public void FillSpinner(final ArrayList<String> leagues){
+    public void FillSpinner(final ArrayList<League> leagues){
+        ArrayList<String> names = new ArrayList<>();
+        for (League league:leagues
+        ) {
+            names.add(league.name);
+        }
+        Leagues = leagues;
         ArrayAdapter spinnerArrayAdapter = new ArrayAdapter(this,
                 android.R.layout.simple_spinner_dropdown_item,
-                leagues);
+                names);
         spinner.setAdapter(spinnerArrayAdapter);
     }
 

@@ -35,13 +35,7 @@ public class MainPresenter {
             model.updateLeagues(new Response.Listener<ArrayList<League>>() {
                 @Override
                 public void onResponse(ArrayList<League> leagues) {
-                    ArrayList<String> names = new ArrayList<>();
-                    for (League league:leagues
-                         ) {
-                        names.add(league.name);
-                    }
-                    view.FillSpinner(names);
-                    view.Leagues = leagues;
+                    view.FillSpinner(leagues);
                 }
             }, new Response.ErrorListener() {
                 @Override
@@ -50,8 +44,9 @@ public class MainPresenter {
                 }
             });
         }
-
-
+        else {
+            view.FillSpinner(leagues);
+        }
     }
 
     public void processError(String e) {

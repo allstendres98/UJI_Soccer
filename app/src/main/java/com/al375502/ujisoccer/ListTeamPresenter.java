@@ -53,6 +53,10 @@ public class ListTeamPresenter {
                 }
             });
         }
+        else{
+            view.PopUpTeam(teams);
+        }
+
 
     }
 
