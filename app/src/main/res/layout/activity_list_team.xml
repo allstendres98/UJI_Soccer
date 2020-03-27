@@ -10,7 +10,8 @@
         android:id="@+id/data"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="#514A4A"
+        android:background="#B8ADAD"
+        android:textColor="#77B1AEAE"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
