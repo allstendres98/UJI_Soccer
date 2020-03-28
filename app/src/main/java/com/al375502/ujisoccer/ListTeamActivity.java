@@ -12,6 +12,7 @@ import android.view.View;
 import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ public class ListTeamActivity extends AppCompatActivity {
 
     public static final String LEAGUE = "League";
     ListView listView;
+    ProgressBar progressBar;
     MyAdapter adapter;
     ArrayList<Team> teams;
     ArrayList<TeamInStanding> teamInStandings;
@@ -32,11 +34,12 @@ public class ListTeamActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_team);
+        listView = findViewById(R.id.listView);
+        progressBar = findViewById(R.id.progressBar);
+
         Intent intent = getIntent();
         int league_id = intent.getIntExtra(LEAGUE,2021);
         final ListTeamActivity thisView = this;
-
-        listView = findViewById(R.id.listView);
 
         final ListTeamPresenter presenter = new ListTeamPresenter(this, Model.getInstance(getApplicationContext()));
         presenter.GetStandingsAndTeams(league_id);
@@ -70,6 +73,8 @@ public class ListTeamActivity extends AppCompatActivity {
         teamInStandings = response;
         adapter = new MyAdapter(this, response);
         listView.setAdapter(adapter);
+        progressBar.setAlpha(0f);
+
     }
 
     public void PopUpTeam(ArrayList<Team> allteams) {

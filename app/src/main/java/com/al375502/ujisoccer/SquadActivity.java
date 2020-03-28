@@ -83,7 +83,7 @@ public class SquadActivity extends AppCompatActivity {
         for (String a: attackers) {
             aux.add(a);
         }
-        //RELLENAR LISTVIEWS
+        //My custom adapter receive a list of all the positions in order with his header at the begining of each one
         MyAdaptersquad adapter = new MyAdaptersquad(this, aux);
 
         ch.setAdapter(adapter);
