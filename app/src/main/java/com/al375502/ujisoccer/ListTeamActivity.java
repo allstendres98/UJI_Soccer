@@ -58,7 +58,7 @@ public class ListTeamActivity extends AppCompatActivity {
 
                 for(int i = 0; i < teams.size(); i++)
                 {
-                    //Log.d("Equipo","deberia de salir pero solo lo pensé");
+                    //Log.d("Equipo","Entra");
                     if(teamSelectedS.equals(teams.get(i).name))
                     {
                         teamSelected = teams.get(i);

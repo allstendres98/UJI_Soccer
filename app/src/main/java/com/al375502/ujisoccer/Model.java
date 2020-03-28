@@ -174,16 +174,16 @@ public final class Model {
                 JSONObject extractedteam = teamstable.getJSONObject(i);
 
                 int id            = extractedteam.getInt("id");
-                String name       = extractedteam.getString("name");
-                String shortName  = extractedteam.getString("shortName");
-                String stadium    = extractedteam.getString("venue");
-                String colors     = extractedteam.getString("clubColors");
-                String website    = extractedteam.getString("website");
-                int founded       = extractedteam.isNull("founded")? 0 : extractedteam.getInt("founded");
+                String name       = extractedteam.isNull("name")?       "Unkown" : extractedteam.getString("name");
+                String shortName  = extractedteam.isNull("shortName")?  "Unkown" : extractedteam.getString("shortName");
+                String stadium    = extractedteam.isNull("venue")?      "Unkown" : extractedteam.getString("venue");
+                String colors     = extractedteam.isNull("clubColors")? "Unkown" : extractedteam.getString("clubColors");
+                String website    = extractedteam.isNull("website")?    "Unkown" : extractedteam.getString("website");
+                int founded       = extractedteam.isNull("founded")?  0 : extractedteam.getInt("founded");
                 int league_id     = competition.getInt("id");
-                Log.d("ANO", "FUNDACION del : "+name+", " + founded);
+                Log.d("Prueba", "FUNDACION del : "+name+", " + founded);
 
-                teams.add(new Team(id, name, shortName, stadium, colors, website, founded, league_id)); //REVISAAAAR Y COMPROBAR
+                teams.add(new Team(id, name, shortName, stadium, colors, website, founded, league_id)); //REVISAAAAR Y COMPROBAR el league_id
             }
             insertTeamsInDao(teams, listener);
 
