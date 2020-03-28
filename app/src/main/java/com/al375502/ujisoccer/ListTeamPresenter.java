@@ -28,6 +28,7 @@ public class ListTeamPresenter {
             @Override
             public void onErrorResponse(VolleyError error) {
                 processError(error.getMessage());
+                view.progressBar.setAlpha(0);
             }
         });
 
